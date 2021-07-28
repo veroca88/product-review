@@ -24,10 +24,11 @@ Route::get('reviews/{review}', function ($slug) {
         return redirect("/");
     }
 
-    $review = file_get_contents($path);
+    // $review = Cache()::remember("reviews.{$slug}", 1200, fn() => {
+    //     file_get_contents($path)});
 
     return view('review', [
         // 'review' => file_get_contents($filename)
         'review' => $review
     ]);
-});
+})->where('review', '[A-z\-]+');
