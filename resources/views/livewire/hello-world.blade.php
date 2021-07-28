@@ -7,4 +7,7 @@
 <option>Adios</option>
 </select>
     <h1>{{ $greeting}} {{ $name}} @if($loud) checked! @endif</h1>
+
+    <button wire:click="resetName($event.target.innerText)">Reset button</button>
+    <button wire:click="$set('name', 'Valerie')">Reset button 2</button>
 </div>
