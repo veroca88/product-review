@@ -1,10 +1,18 @@
 <!doctype html>
 
 <title>How many starts!</title>
-@livewireStyles
+<!-- @livewireStyles -->
 <link rel="stylesheet" href="/app.css">
 
 <body>
+    <?php foreach ($reviews as $review) : ?>
+        <article>
+            <?= $review; ?>
+        </article>
+        <?php endforeach; ?>
+</body>
+
+<!-- <body>
     <h1>PRODUCT REVIEW</h1>
     @livewire('hello-world')
 <article>
@@ -26,4 +34,4 @@
 </article>
     
     @livewireScripts
-</body>
+</body> -->

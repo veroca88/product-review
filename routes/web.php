@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Models\Review;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,21 +14,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('reviews');
+    return view('reviews', [
+        'reviews' => Review::all()
+    ]);
 });
 
-Route::get('reviews/{review}', function ($slug) {
-    $path = __DIR__ . "/../resources/reviews/{$slug}.html";
-
-    if (! file_exists($path)) {
-        return redirect("/");
-    }
-
-    // $review = Cache()::remember("reviews.{$slug}", 1200, fn() => {
-    //     file_get_contents($path)});
-
+Route::get('reviews/{review}', function ($slug) { 
     return view('review', [
-        // 'review' => file_get_contents($filename)
-        'review' => $review
+        'review' => Review::find($slug)
     ]);
+
 })->where('review', '[A-z\-]+');
