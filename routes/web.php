@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\Review;
+use Illuminate\Support\Facades\File;
+use Spatie\YamlFrontMatter\YamlFrontMatter;
+use Symfony\Component\Yaml\Yaml;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,9 +18,24 @@ use App\Models\Review;
 */
 
 Route::get('/', function () {
+    $files = File::files(resource_path('reviews'));
+
+    $reviews = [];
+
+    foreach($files as $file) {
+        $document = YamlFrontMatter::parseFile($file);
+
+        $reviews[] = new Review(
+            $document->title, 
+            $document->excerpt, 
+            $document->date, 
+            $document->body(),
+        );
+    }
+
     return view('reviews', [
-        'reviews' => Review::all()
-    ]);
+      'reviews' => $reviews
+      ]); 
 });
 
 Route::get('reviews/{review}', function ($slug) { 

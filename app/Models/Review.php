@@ -7,6 +7,20 @@ use Illuminate\Support\Facades\File;
 
 class Review
 {
+    public $title;
+    public $excerpt;
+    public $date;
+    public $body;
+
+   public function __construct($title, $excerpt, $date, $body)
+   {
+   $this->title=$title;
+   $this->excerpt=$excerpt;
+   $this->date=$date;
+   $this->body=$body;
+       
+   }
+
     public static function all()
     {
         $files = File::files(resource_path("reviews/"));

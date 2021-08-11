@@ -7,7 +7,7 @@
 <body>
     <?php foreach ($reviews as $review) : ?>
         <article>
-            <?= $review; ?>
+            <h1><?= $review->title; ?></h1>
         </article>
         <?php endforeach; ?>
 </body>
